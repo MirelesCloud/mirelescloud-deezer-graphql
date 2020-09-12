@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ChartListQuery } from '../../generated/graphql'
-import { useState } from 'react'
+
 import { 
   ContentWrapper,
   Card, 
@@ -8,14 +8,14 @@ import {
   CardImage,
   CardText,
   CardFooter, 
-  ModalWrapper, 
+  /* ModalWrapper, 
   ModalContainer,
   ModalContent,
   ModalHeader,
   ModalText,
   Row,
   Column,
-  CloseModal
+  CloseModal */
 } from '../../Styles'
 
 
