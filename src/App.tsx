@@ -1,13 +1,22 @@
 import React from 'react';
 import './App.css';
-import { MainContainer} from './Styles'
+import { MainContainer, Nav, NavLeft, NavHeader} from './Styles'
 import ChartList from './components/ChartList'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 function App() {
   return (
-    <MainContainer>
+    <>
+     <Nav>
+       <NavHeader>
+         <NavLeft>MirelesCloud Music App</NavLeft>
+       </NavHeader>
+     </Nav>
+     <MainContainer>
        <ChartList/>
-    </MainContainer>
+     </MainContainer>
+    </>
+   
   );
 }
 

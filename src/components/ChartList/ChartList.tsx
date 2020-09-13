@@ -28,7 +28,7 @@ interface Props {
 const ChartList: React.FC<Props> = ({ data }) => {
   return (
     <div>
-      <h1>Top Tracks</h1>
+      <h3>Top Tracks</h3>
       <ContentWrapper>
         {!!data.chart &&
           data.chart.tracks!.map((track) => 
@@ -37,13 +37,15 @@ const ChartList: React.FC<Props> = ({ data }) => {
               <CardImage src={track?.artist?.picture!} alt={track?.title as any}/>
               <CardBody >
                 <CardText>{track?.title}</CardText>
-                <CardFooter>by {track?.artist?.name}</CardFooter>
+                <CardFooter>By {track?.artist?.name}</CardFooter>
+                
               </CardBody>
+              
             </Card>
           )
           )}
       </ContentWrapper>
-      <h1>Top Artists</h1>
+      <h3>Top Artists</h3>
       <ContentWrapper>
         {!!data.chart &&
           data.chart.artists!.map((artist) => 
@@ -58,7 +60,7 @@ const ChartList: React.FC<Props> = ({ data }) => {
           )
           )}
       </ContentWrapper>
-      <h1>Top Albums</h1>
+      <h3>Top Albums</h3>
       <ContentWrapper>
         {!!data.chart &&
           data.chart.albums!.map((album) => 

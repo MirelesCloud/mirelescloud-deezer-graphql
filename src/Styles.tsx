@@ -6,8 +6,10 @@ export const PageContainer = styled.div`
 `
 /* Header */
 export const Nav = styled('div')`
-    background-color: #f7f7f5;
+    background-image: linear-gradient(to bottom right, green, yellow);
+    
     border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `
 
 export const NavHeader = styled('div')`
@@ -24,6 +26,7 @@ export const NavLeft = styled('div')`
     text-align: left;
     font-size: 2em;
     font-weight: 300;
+    color: white;
 
     @media (max-width: 992px) {
         font-size: 1.5em;
@@ -43,7 +46,7 @@ export const NavLeft = styled('div')`
 `
 
 export const NavCenter = styled('div')`
-    wdith; 33.333%;
+    width: 33.333%;
     text-align: center;
     font-size: 2rem;
     font-weight: 300;
@@ -160,13 +163,13 @@ export const CardBody = styled('div')`
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 1.25rem;
+  padding: 1rem;
 `
 
 export const CardImage = styled('img')`
     cursor: pointer;
     width: 100%;
-    height: 10vw;
+    height: auto;
     object-fit: cover;
   
 `
@@ -178,12 +181,12 @@ export const CardHeader = styled('div')`
 `;
 
 export const CardText = styled('p')`
-  margin: 2px;
+  margin: 1px;
   font-size: 1rem;
 `
 
 export const CardFooter = styled('p')`
-    margin: 2px;
+  margin: 5px 1px;
   font-size: 0.8rem;
 `
 
@@ -222,7 +225,7 @@ export const Dialog = styled.div`
   padding: 40px 50px;
   position: absolute;
   top: 50%;
-  left 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
   

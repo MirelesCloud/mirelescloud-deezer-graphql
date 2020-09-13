@@ -6,6 +6,7 @@ export const QUERY_CHART_LIST = gql`
       tracks {
         id
         title 
+        preview
         artist {
           picture
           name

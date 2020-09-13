@@ -13,6 +13,7 @@ export type Scalars = {
   Boolean: boolean,
   Int: number,
   Float: number,
+  /** The `Upload` scalar type represents a file upload. */
   Upload: any,
 };
 
@@ -118,7 +119,7 @@ export type ChartListQuery = (
     { __typename?: 'Chart' }
     & { tracks: Maybe<Array<Maybe<(
       { __typename?: 'Tracks' }
-      & Pick<Tracks, 'id' | 'title'>
+      & Pick<Tracks, 'id' | 'title' | 'preview'>
       & { artist: Maybe<(
         { __typename?: 'Artists' }
         & Pick<Artists, 'picture' | 'name'>
@@ -144,6 +145,7 @@ export const ChartListDocument = gql`
     tracks {
       id
       title
+      preview
       artist {
         picture
         name
