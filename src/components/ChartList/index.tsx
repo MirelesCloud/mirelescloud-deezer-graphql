@@ -10,7 +10,7 @@ const ChartListContainer = () => {
   }
 
   if (error || !data) {
-    return <div>Error :(</div>
+    return <div>Error</div>
   }
   console.log(data)
   return <ChartList data={data}/>

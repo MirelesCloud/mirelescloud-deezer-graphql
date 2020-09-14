@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ChartListQuery } from '../../generated/graphql'
-
+import { Link } from 'react-router-dom'
 import { 
   ContentWrapper,
   Card, 
@@ -38,6 +38,8 @@ const ChartList: React.FC<Props> = ({ data }) => {
               <CardBody >
                 <CardText>{track?.title}</CardText>
                 <CardFooter>By {track?.artist?.name}</CardFooter>
+                <audio className="title"><source src={track?.preview!}/></audio>
+                <Link to={`track/${track.id}`}>Detail</Link>
                 
               </CardBody>
               

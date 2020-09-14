@@ -6,7 +6,7 @@ export const PageContainer = styled.div`
 `
 /* Header */
 export const Nav = styled('div')`
-    background-image: linear-gradient(to bottom right, green, yellow);
+    background-image: linear-gradient(to bottom right, purple, green, yellow);
     
     border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -136,7 +136,7 @@ export const Card = styled('div')`
     margin: 10px;
     cursor: pointer;
     transition: 0.3s all ease-in;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.09);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
