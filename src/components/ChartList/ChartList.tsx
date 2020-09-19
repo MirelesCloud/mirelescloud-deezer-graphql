@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { ChartListQuery } from '../../generated/graphql'
-import { Link } from 'react-router-dom'
 import { 
+  CategoryHeader,
   ContentWrapper,
   Card, 
   CardBody, 
   CardImage,
   CardText,
-  CardFooter, 
+  CardFooter,
   /* ModalWrapper, 
   ModalContainer,
   ModalContent,
@@ -17,6 +17,10 @@ import {
   Column,
   CloseModal */
 } from '../../Styles'
+import { Modal } from '../Modals/Modal'
+import {useModal} from '../Modals/useModal'
+import { TrackModal } from '../Modals/TrackModal'
+
 
 
 interface Props {
@@ -28,26 +32,34 @@ interface Props {
 const ChartList: React.FC<Props> = ({ data }) => {
   return (
     <div>
-      <h3>Top Tracks</h3>
+      <CategoryHeader>Top Tracks</CategoryHeader>
       <ContentWrapper>
         {!!data.chart &&
           data.chart.tracks!.map((track) => 
           !!track && (
             <Card key={track.id!}>
-              <CardImage src={track?.artist?.picture!} alt={track?.title as any}/>
+              <Tracks 
+              title={track?.title!} 
+              artist={track?.artist?.name!} 
+              picture={track?.artist?.picture!}
+              preview={track?.preview!}
+              />
+             {/*  <CardImage src={track?.artist?.picture!} alt={track?.title as any}/>
               <CardBody >
                 <CardText>{track?.title}</CardText>
                 <CardFooter>By {track?.artist?.name}</CardFooter>
                 <audio className="title"><source src={track?.preview!}/></audio>
                 <Link to={`track/${track.id}`}>Detail</Link>
+                <Modal isShown={isShown} hide={toggle} modalContent={track?.title!} headerText="bullshit"/>
                 
-              </CardBody>
+              </CardBody> */}
               
             </Card>
           )
           )}
       </ContentWrapper>
-      <h3>Top Artists</h3>
+      <hr/>
+      <CategoryHeader>Top Artists</CategoryHeader>
       <ContentWrapper>
         {!!data.chart &&
           data.chart.artists!.map((artist) => 
@@ -62,7 +74,8 @@ const ChartList: React.FC<Props> = ({ data }) => {
           )
           )}
       </ContentWrapper>
-      <h3>Top Albums</h3>
+      <hr/>
+      <CategoryHeader>Top Albums</CategoryHeader>
       <ContentWrapper>
         {!!data.chart &&
           data.chart.albums!.map((album) => 
@@ -82,6 +95,35 @@ const ChartList: React.FC<Props> = ({ data }) => {
 }
 
 export default ChartList
+
+interface  ITracks {
+  title: string;
+  artist: string;
+  picture: string;
+  preview: string
+}
+
+const Tracks: React.FC<ITracks> = ({ title, artist, picture, preview }) => {
+  const { isShown, toggle } = useModal()
+ 
+
+  return (
+    <>
+      <CardImage src={picture} alt={title} onClick={toggle}/>
+      <CardBody>
+        <CardText>{title}</CardText>
+        <CardFooter>By {artist!}</CardFooter>
+        <Modal isShown={isShown} hide={toggle} modalContent={
+          <TrackModal 
+            title={title}
+            picture={picture}
+            artist={artist}
+            preview={preview}
+          />} />
+      </CardBody>
+    </>
+  )
+}
 /* 
 interface  ITracks {
   title: string;

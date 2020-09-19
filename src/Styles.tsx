@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { PlayCircle, PauseCircle } from '@emotion-icons/boxicons-regular'
 
 export const PageContainer = styled.div`
   position: relative;
@@ -127,7 +128,9 @@ export const Footer = styled.footer`
   background-color: #cccccc;
   text-align: center;
 `
-
+export const CategoryHeader = styled.h2`
+  font-weight: 300;
+`
 /* Card */
 export const Card = styled('div')`
     position: relative;
@@ -254,6 +257,7 @@ export const ModalContent = styled.div`
 export const Column = styled.div`
   float: left;
   width: 50%;
+  padding: 5px;
 
   @media(max-width: 378px) {
     width: 100%;
@@ -261,19 +265,22 @@ export const Column = styled.div`
 `
 
 export const Row = styled.div`
-  &::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
+  display: flex;
+  flex-direction: row;
+ 
 `
 
-export const ModalHeader = styled.h4``
+export const ModalHeader = styled.h2`
+ padding: 0 15px;
+ font-weight: 300;
+ margin-bottom: 10px;
+`
 
 
-export const ModalText = styled.p`
-  padding: 0px;
-  margin: 3px;
+export const ModalText = styled.div`
+  padding: 0 15px;
+  font-size: 1.2rem;
+  font-weight: 300;
 `
 export const CloseModal = styled.p`
   position: absolute;
@@ -294,5 +301,85 @@ export const CloseModal = styled.p`
 export const Line = styled.hr`
   color: rgba(0, 0, 0, 0.7);
 `
+export const Image = styled.img`
+    cursor: pointer;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+`
+//* New Modal *//
+export const Wrapper = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 700;
+  width: inherit;
+  outline: 0;
+`;
+export const Backdrop = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 500;
+`;
+export const StyledModal = styled.div`
+  z-index: 100;
+  background: white;
+  position: relative;
+  margin: auto;
+  border-radius: 8px;
+`;
+export const Header = styled.div`
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem;
+`;
+export const HeaderText = styled.div`
+  color: #fff;
+  align-self: center;
+  color: lightgray;
+`;
+export const CloseButton = styled.button`
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 3px;
+  margin-left: 0.5rem;
+  background: none;
+  :hover {
+    cursor: pointer;
+  }
+`;
+export const Content = styled.div`
+  padding: 10px;
+  max-height: 50rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+`;
 
+/*Icons */
+export const Play = styled(PlayCircle)`
+  width: 2rem;
+  height: auto;
+  :hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: transform .5s;
+    
+  }
+`
 
+export const Pause = styled(PauseCircle)`
+  width: 2rem;
+  height: auto;
+  :hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: transform .5s;
+    
+  }
+`
