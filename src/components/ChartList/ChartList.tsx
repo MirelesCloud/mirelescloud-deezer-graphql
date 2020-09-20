@@ -21,15 +21,17 @@ import { Modal } from '../Modals/Modal'
 import {useModal} from '../Modals/useModal'
 import { TrackModal } from '../Modals/TrackModal'
 
-
-
-interface Props {
+export interface OwnProps {
+  handleId: (newId: string) => void
+}
+interface Props extends OwnProps {
   data: ChartListQuery;
 }
 
 
 
-const ChartList: React.FC<Props> = ({ data }) => {
+const ChartList: React.FC<Props> = ({ data, handleId }) => {
+  console.log(data)
   return (
     <div>
       <CategoryHeader>Top Tracks</CategoryHeader>
@@ -37,12 +39,13 @@ const ChartList: React.FC<Props> = ({ data }) => {
         {!!data.chart &&
           data.chart.tracks!.map((track) => 
           !!track && (
-            <Card key={track.id!}>
+            <Card key={track.id!} onClick={() => handleId(track?.id!)}>
               <Tracks 
               title={track?.title!} 
               artist={track?.artist?.name!} 
               picture={track?.artist?.picture!}
               preview={track?.preview!}
+              
               />
              {/*  <CardImage src={track?.artist?.picture!} alt={track?.title as any}/>
               <CardBody >
@@ -101,6 +104,7 @@ interface  ITracks {
   artist: string;
   picture: string;
   preview: string
+  
 }
 
 const Tracks: React.FC<ITracks> = ({ title, artist, picture, preview }) => {

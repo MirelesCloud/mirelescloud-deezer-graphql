@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { useChartListQuery } from '../../generated/graphql'
-import ChartList from './ChartList'
+import ChartList, { OwnProps } from './ChartList'
 
-const ChartListContainer = () => {
+
+const ChartListContainer = (props: OwnProps) => {
   const { data, error, loading } = useChartListQuery();
   
   if (loading) {
@@ -12,8 +13,7 @@ const ChartListContainer = () => {
   if (error || !data) {
     return <div>Error</div>
   }
-  console.log(data)
-  return <ChartList data={data}/>
+  return <ChartList data={data} {...props}/>
 }
 
 export default ChartListContainer

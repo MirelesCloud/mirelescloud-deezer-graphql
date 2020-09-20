@@ -144,6 +144,26 @@ export type ChartListQuery = (
   )> }
 );
 
+export type TrackInfoQueryVariables = {
+  id: Scalars['ID']
+};
+
+
+export type TrackInfoQuery = (
+  { __typename?: 'Query' }
+  & { track: Maybe<(
+    { __typename?: 'Track' }
+    & Pick<Track, 'id' | 'title' | 'duration' | 'preview'>
+    & { artist: Maybe<(
+      { __typename?: 'Artist' }
+      & Pick<Artist, 'id' | 'name'>
+    )>, album: Maybe<(
+      { __typename?: 'Album' }
+      & Pick<Album, 'id' | 'title' | 'cover'>
+    )> }
+  )> }
+);
+
 export type TrackQueryVariables = {
   id: Scalars['ID']
 };
@@ -229,6 +249,68 @@ export function useChartListLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHo
 export type ChartListQueryHookResult = ReturnType<typeof useChartListQuery>;
 export type ChartListLazyQueryHookResult = ReturnType<typeof useChartListLazyQuery>;
 export type ChartListQueryResult = ApolloReactCommon.QueryResult<ChartListQuery, ChartListQueryVariables>;
+export const TrackInfoDocument = gql`
+    query TrackInfo($id: ID!) {
+  track(id: $id) {
+    id
+    title
+    duration
+    preview
+    artist {
+      id
+      name
+    }
+    album {
+      id
+      title
+      cover
+    }
+  }
+}
+    `;
+export type TrackInfoComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<TrackInfoQuery, TrackInfoQueryVariables>, 'query'> & ({ variables: TrackInfoQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const TrackInfoComponent = (props: TrackInfoComponentProps) => (
+      <ApolloReactComponents.Query<TrackInfoQuery, TrackInfoQueryVariables> query={TrackInfoDocument} {...props} />
+    );
+    
+export type TrackInfoProps<TChildProps = {}> = ApolloReactHoc.DataProps<TrackInfoQuery, TrackInfoQueryVariables> & TChildProps;
+export function withTrackInfo<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  TrackInfoQuery,
+  TrackInfoQueryVariables,
+  TrackInfoProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, TrackInfoQuery, TrackInfoQueryVariables, TrackInfoProps<TChildProps>>(TrackInfoDocument, {
+      alias: 'trackInfo',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useTrackInfoQuery__
+ *
+ * To run a query within a React component, call `useTrackInfoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTrackInfoQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTrackInfoQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useTrackInfoQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<TrackInfoQuery, TrackInfoQueryVariables>) {
+        return ApolloReactHooks.useQuery<TrackInfoQuery, TrackInfoQueryVariables>(TrackInfoDocument, baseOptions);
+      }
+export function useTrackInfoLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<TrackInfoQuery, TrackInfoQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<TrackInfoQuery, TrackInfoQueryVariables>(TrackInfoDocument, baseOptions);
+        }
+export type TrackInfoQueryHookResult = ReturnType<typeof useTrackInfoQuery>;
+export type TrackInfoLazyQueryHookResult = ReturnType<typeof useTrackInfoLazyQuery>;
+export type TrackInfoQueryResult = ApolloReactCommon.QueryResult<TrackInfoQuery, TrackInfoQueryVariables>;
 export const TrackDocument = gql`
     query Track($id: ID!) {
   track(id: $id) {
