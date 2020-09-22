@@ -22,6 +22,9 @@ export type Album = {
   id?: Maybe<Scalars['ID']>,
   title?: Maybe<Scalars['String']>,
   cover?: Maybe<Scalars['String']>,
+  md5_image?: Maybe<Scalars['String']>,
+  cover_medium?: Maybe<Scalars['String']>,
+  cover_big?: Maybe<Scalars['String']>,
   nb_tracks?: Maybe<Scalars['Int']>,
   label?: Maybe<Scalars['String']>,
   rating?: Maybe<Scalars['Int']>,
@@ -45,8 +48,10 @@ export type Artist = {
   id?: Maybe<Scalars['ID']>,
   name?: Maybe<Scalars['String']>,
   picture?: Maybe<Scalars['String']>,
+  picture_medium?: Maybe<Scalars['String']>,
+  picture_big?: Maybe<Scalars['String']>,
   nb_album?: Maybe<Scalars['Int']>,
-  np_fan?: Maybe<Scalars['Int']>,
+  nb_fan?: Maybe<Scalars['Int']>,
   tracklist?: Maybe<Scalars['String']>,
 };
 
@@ -99,6 +104,7 @@ export type Track = {
   duration?: Maybe<Scalars['Int']>,
   rank?: Maybe<Scalars['Int']>,
   release_date?: Maybe<Scalars['String']>,
+  md5_image?: Maybe<Scalars['String']>,
   preview?: Maybe<Scalars['String']>,
   artist?: Maybe<Artist>,
   album?: Maybe<Album>,
@@ -153,13 +159,13 @@ export type TrackInfoQuery = (
   { __typename?: 'Query' }
   & { track: Maybe<(
     { __typename?: 'Track' }
-    & Pick<Track, 'id' | 'title' | 'duration' | 'preview'>
+    & Pick<Track, 'id' | 'title' | 'duration' | 'release_date' | 'preview' | 'rank' | 'md5_image'>
     & { artist: Maybe<(
       { __typename?: 'Artist' }
-      & Pick<Artist, 'id' | 'name'>
+      & Pick<Artist, 'id' | 'name' | 'picture' | 'picture_medium' | 'picture_big'>
     )>, album: Maybe<(
       { __typename?: 'Album' }
-      & Pick<Album, 'id' | 'title' | 'cover'>
+      & Pick<Album, 'id' | 'title' | 'cover' | 'md5_image' | 'cover_medium' | 'cover_big'>
     )> }
   )> }
 );
@@ -255,15 +261,24 @@ export const TrackInfoDocument = gql`
     id
     title
     duration
+    release_date
     preview
+    rank
+    md5_image
     artist {
       id
       name
+      picture
+      picture_medium
+      picture_big
     }
     album {
       id
       title
       cover
+      md5_image
+      cover_medium
+      cover_big
     }
   }
 }

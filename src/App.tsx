@@ -15,7 +15,7 @@ function App() {
   return (
     <>
      <Router>
-       <Route path="track/:id" component={TrackDetail}/>
+       
      <Nav>
        <NavHeader>
          <NavLeft>MirelesCloud Music App</NavLeft>
@@ -26,6 +26,7 @@ function App() {
        <ChartList handleId={handleId}/>
        <Track id={id}/>
      </MainContainer>
+     <Route path="track/:id" component={Track}/>
      </Router>
     </>
    

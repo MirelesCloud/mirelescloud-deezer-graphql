@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useCallback} from 'react'
 import { ChartListQuery } from '../../generated/graphql'
 import { 
   CategoryHeader,
@@ -17,9 +17,11 @@ import {
   Column,
   CloseModal */
 } from '../../Styles'
+import { Link } from 'react-router-dom'
 import { Modal } from '../Modals/Modal'
 import {useModal} from '../Modals/useModal'
 import { TrackModal } from '../Modals/TrackModal'
+import Track from '../Track'
 
 export interface OwnProps {
   handleId: (newId: string) => void
@@ -31,7 +33,7 @@ interface Props extends OwnProps {
 
 
 const ChartList: React.FC<Props> = ({ data, handleId }) => {
-  console.log(data)
+  
   return (
     <div>
       <CategoryHeader>Top Tracks</CategoryHeader>
@@ -39,25 +41,22 @@ const ChartList: React.FC<Props> = ({ data, handleId }) => {
         {!!data.chart &&
           data.chart.tracks!.map((track) => 
           !!track && (
-            <Card key={track.id!} onClick={() => handleId(track?.id!)}>
-              <Tracks 
+           
+              <Card key={track.id!} >
+                
+              <Tracks
+              id={track?.id!}
               title={track?.title!} 
               artist={track?.artist?.name!} 
               picture={track?.artist?.picture!}
               preview={track?.preview!}
+              handleId={handleId}
               
               />
-             {/*  <CardImage src={track?.artist?.picture!} alt={track?.title as any}/>
-              <CardBody >
-                <CardText>{track?.title}</CardText>
-                <CardFooter>By {track?.artist?.name}</CardFooter>
-                <audio className="title"><source src={track?.preview!}/></audio>
-                <Link to={`track/${track.id}`}>Detail</Link>
-                <Modal isShown={isShown} hide={toggle} modalContent={track?.title!} headerText="bullshit"/>
-                
-              </CardBody> */}
-              
+             
             </Card>
+            
+            
           )
           )}
       </ContentWrapper>
@@ -99,7 +98,8 @@ const ChartList: React.FC<Props> = ({ data, handleId }) => {
 
 export default ChartList
 
-interface  ITracks {
+interface  ITracks extends OwnProps {
+  id: string;
   title: string;
   artist: string;
   picture: string;
@@ -107,23 +107,18 @@ interface  ITracks {
   
 }
 
-const Tracks: React.FC<ITracks> = ({ title, artist, picture, preview }) => {
+const Tracks: React.FC<ITracks> = ({ id, title, artist, picture, preview, handleId }) => {
   const { isShown, toggle } = useModal()
  
 
   return (
     <>
       <CardImage src={picture} alt={title} onClick={toggle}/>
-      <CardBody>
-        <CardText>{title}</CardText>
+      <CardBody >
+        <CardText onClick={() => handleId(id)}>{title}</CardText>
         <CardFooter>By {artist!}</CardFooter>
         <Modal isShown={isShown} hide={toggle} modalContent={
-          <TrackModal 
-            title={title}
-            picture={picture}
-            artist={artist}
-            preview={preview}
-          />} />
+          <Track id={id}/>} />
       </CardBody>
     </>
   )

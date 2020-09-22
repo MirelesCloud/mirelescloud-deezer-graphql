@@ -6,15 +6,24 @@ export const QUERY_TRACK_PROFILE = gql`
       id
       title
       duration
+      release_date
       preview
+      rank
+      md5_image
       artist {
         id
         name
+        picture
+        picture_medium
+        picture_big
       }
       album {
         id
         title
         cover
+        md5_image
+        cover_medium
+        cover_big
       }
     }
   }
