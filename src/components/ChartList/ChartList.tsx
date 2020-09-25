@@ -1,4 +1,4 @@
-import React, { useState, useCallback} from 'react'
+import React from 'react'
 import { ChartListQuery } from '../../generated/graphql'
 import { 
   CategoryHeader,
@@ -17,10 +17,8 @@ import {
   Column,
   CloseModal */
 } from '../../Styles'
-import { Link } from 'react-router-dom'
 import { Modal } from '../Modals/Modal'
 import {useModal} from '../Modals/useModal'
-import { TrackModal } from '../Modals/TrackModal'
 import Track from '../Track'
 
 export interface OwnProps {

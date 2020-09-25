@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { PlayCircle, PauseCircle } from '@emotion-icons/boxicons-regular'
+import { CloseCircleOutline } from '@emotion-icons/evaicons-outline'
 
 export const PageContainer = styled.div`
   position: relative;
@@ -8,7 +9,6 @@ export const PageContainer = styled.div`
 /* Header */
 export const Nav = styled('div')`
     background-image: linear-gradient(to bottom right, purple, green, yellow);
-    
     border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `
@@ -224,8 +224,7 @@ export const Overlay = styled.div`
 
 export const Dialog = styled.div`
   background: white;
-  border-radius: 5px;
-  padding: 40px 50px;
+  border-radius: 8px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -234,16 +233,16 @@ export const Dialog = styled.div`
   
 `
 
-export const ModalContainer = styled.div`
-  position: relative;
-  z-index: 0;
-  
-`
-
 export const ModalWrapper = styled.div`
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
+`
+
+export const ModalContainer = styled.div`
+  position: relative;
+  z-index: 0;
+  
 `
 export const ModalContent = styled.div`
   position: relative;
@@ -253,33 +252,39 @@ export const ModalContent = styled.div`
   transition: 0.3s all ease-in;
 `
 
-
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+ 
+`
 export const Column = styled.div`
   float: left;
+  margin: 0 10px;
   width: 50%;
-  padding: 5px;
+  padding: 0;
 
   @media(max-width: 378px) {
     width: 100%;
   }
 `
 
-export const Row = styled.div`
-  display: flex;
-  flex-direction: row;
- 
-`
-
 export const ModalHeader = styled.h2`
- padding: 0 15px;
- font-weight: 300;
- margin-bottom: 10px;
+  font-weight: 400;
+  margin-bottom: 3px;
 `
-
-
+export const ModalSubHeader = styled.h4`
+  font-weight: 300;
+`
+export const ModalCategory = styled.h5`
+  font-weight: 500;
+`
 export const ModalText = styled.div`
-  padding: 0 15px;
   font-size: 1.2rem;
+  font-weight: 300;
+`
+export const ModalTextSm = styled.div`
+  font-size: 0.8rem;
   font-weight: 300;
 `
 export const CloseModal = styled.p`
@@ -306,6 +311,14 @@ export const Image = styled.img`
     width: 100%;
     height: auto;
     object-fit: cover;
+`
+
+export const ImageSmall = styled.img`
+  margin-top: 20px;
+  width: 120px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
 `
 //* New Modal *//
 export const Wrapper = styled.div`
@@ -334,6 +347,7 @@ export const StyledModal = styled.div`
   border-radius: 8px;
 `;
 export const Header = styled.div`
+  background-image: linear-gradient(to bottom right, purple, green, yellow);
   border-radius: 8px 8px 0 0;
   display: flex;
   justify-content: space-between;
@@ -344,24 +358,27 @@ export const HeaderText = styled.div`
   align-self: center;
   color: lightgray;
 `;
-export const CloseButton = styled.button`
-  font-size: 0.8rem;
-  border: none;
-  border-radius: 3px;
-  margin-left: 0.5rem;
-  background: none;
+export const CloseButton = styled(CloseCircleOutline)`
+  width: 1.5rem;
+  padding: 10px;
+  color: white;
+  margin-left: auto;
   :hover {
     cursor: pointer;
   }
 `;
 export const Content = styled.div`
-  padding: 10px;
+  padding: 5px;
   max-height: 50rem;
   overflow-x: hidden;
   overflow-y: auto;
 `;
 
 /*Icons */
+export const PlayContainer = styled.div`
+  margin: 20px 20px;
+`
+
 export const Play = styled(PlayCircle)`
   width: 2rem;
   height: auto;

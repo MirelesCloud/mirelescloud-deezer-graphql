@@ -9,7 +9,6 @@ export const QUERY_TRACK_PROFILE = gql`
       release_date
       preview
       rank
-      md5_image
       artist {
         id
         name
@@ -21,7 +20,6 @@ export const QUERY_TRACK_PROFILE = gql`
         id
         title
         cover
-        md5_image
         cover_medium
         cover_big
       }

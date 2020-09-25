@@ -104,7 +104,6 @@ export type Track = {
   duration?: Maybe<Scalars['Int']>,
   rank?: Maybe<Scalars['Int']>,
   release_date?: Maybe<Scalars['String']>,
-  md5_image?: Maybe<Scalars['String']>,
   preview?: Maybe<Scalars['String']>,
   artist?: Maybe<Artist>,
   album?: Maybe<Album>,
@@ -159,13 +158,13 @@ export type TrackInfoQuery = (
   { __typename?: 'Query' }
   & { track: Maybe<(
     { __typename?: 'Track' }
-    & Pick<Track, 'id' | 'title' | 'duration' | 'release_date' | 'preview' | 'rank' | 'md5_image'>
+    & Pick<Track, 'id' | 'title' | 'duration' | 'release_date' | 'preview' | 'rank'>
     & { artist: Maybe<(
       { __typename?: 'Artist' }
       & Pick<Artist, 'id' | 'name' | 'picture' | 'picture_medium' | 'picture_big'>
     )>, album: Maybe<(
       { __typename?: 'Album' }
-      & Pick<Album, 'id' | 'title' | 'cover' | 'md5_image' | 'cover_medium' | 'cover_big'>
+      & Pick<Album, 'id' | 'title' | 'cover' | 'cover_medium' | 'cover_big'>
     )> }
   )> }
 );
@@ -264,7 +263,6 @@ export const TrackInfoDocument = gql`
     release_date
     preview
     rank
-    md5_image
     artist {
       id
       name
@@ -276,7 +274,6 @@ export const TrackInfoDocument = gql`
       id
       title
       cover
-      md5_image
       cover_medium
       cover_big
     }

@@ -2,12 +2,11 @@ import * as React from 'react'
 import ReactDOM from 'react-dom'
 
 import {
-  Wrapper,
+  Overlay,
+  Dialog,
   Header,
-  StyledModal,
   CloseButton,
   Content,
-  Backdrop,
   
 } from '../../Styles'
 
@@ -24,17 +23,14 @@ export const Modal: React.FC<Props> = ({
 }) => {
 
   const modal = (
-    <>
-      <Backdrop/>
-      <Wrapper>
-        <StyledModal>
-          <Header>
-            <CloseButton onClick={hide}>X</CloseButton>
-          </Header>
-          <Content>{modalContent}</Content>
-        </StyledModal>
-      </Wrapper>
-    </>
+    <Overlay>
+      <Dialog>
+        <Header>
+          <CloseButton onClick={hide}/>
+        </Header>
+        <Content>{modalContent}</Content>
+      </Dialog>
+    </Overlay>
   )
 
   return isShown ? ReactDOM.createPortal(modal, document.body) : null;

@@ -1326,7 +1326,7 @@
     "@babel/runtime" "^7.10.5"
     "@emotion-icons/emotion-icon" "2.0.3"
 
-"@emotion-icons/evaicons-outline@2.10.0":
+"@emotion-icons/evaicons-outline@2.10.0", "@emotion-icons/evaicons-outline@^2.10.0":
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/@emotion-icons/evaicons-outline/-/evaicons-outline-2.10.0.tgz#85652c13dca4ab9d4f422ad983712f245b87e32d"
   integrity sha512-ZkhKOu4v5th4DfsGLSF4GkRbdrL4/lKDykgF2m0nG/+57Zigdi0Ah8MzJ78oF8U6XG5Tcd1aM8scGhdihErh+Q==

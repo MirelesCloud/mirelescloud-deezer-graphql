@@ -10,7 +10,6 @@ import {
   Pause,
 } from '../../Styles'
 
-
 interface Props {
   artist: string;
   title: string;
