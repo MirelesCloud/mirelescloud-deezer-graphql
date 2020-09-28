@@ -8,18 +8,14 @@ import {
   CardImage,
   CardText,
   CardFooter,
-  /* ModalWrapper, 
-  ModalContainer,
-  ModalContent,
-  ModalHeader,
-  ModalText,
-  Row,
-  Column,
-  CloseModal */
 } from '../../Styles'
 import { Modal } from '../Modals/Modal'
 import {useModal} from '../Modals/useModal'
 import Track from '../Track'
+import Album from '../Album/Index'
+import Artist from '../Artist/Index'
+
+
 
 export interface OwnProps {
   handleId: (newId: string) => void
@@ -28,10 +24,8 @@ interface Props extends OwnProps {
   data: ChartListQuery;
 }
 
-
-
 const ChartList: React.FC<Props> = ({ data, handleId }) => {
-  
+  console.log(data)
   return (
     <div>
       <CategoryHeader>Top Tracks</CategoryHeader>
@@ -39,9 +33,7 @@ const ChartList: React.FC<Props> = ({ data, handleId }) => {
         {!!data.chart &&
           data.chart.tracks!.map((track) => 
           !!track && (
-           
               <Card key={track.id!} >
-                
               <Tracks
               id={track?.id!}
               title={track?.title!} 
@@ -49,12 +41,8 @@ const ChartList: React.FC<Props> = ({ data, handleId }) => {
               picture={track?.artist?.picture!}
               preview={track?.preview!}
               handleId={handleId}
-              
               />
-             
             </Card>
-            
-            
           )
           )}
       </ContentWrapper>
@@ -65,11 +53,12 @@ const ChartList: React.FC<Props> = ({ data, handleId }) => {
           data.chart.artists!.map((artist) => 
           !!artist && (
             <Card key={artist?.id!}>
-              <CardImage src={artist?.picture!} alt={artist?.name as any}/>
+              <Artists id={artist?.id!} name={artist?.name!} picture_big={artist?.picture!} handleId={handleId}/>
+              {/* <CardImage src={artist?.picture!} alt={artist?.name as any}/>
               <CardBody >
                 <CardText>{artist?.name}</CardText>
                 <CardFooter>No {artist?.position}</CardFooter>
-              </CardBody>
+              </CardBody> */}
             </Card>
           )
           )}
@@ -80,12 +69,14 @@ const ChartList: React.FC<Props> = ({ data, handleId }) => {
         {!!data.chart &&
           data.chart.albums!.map((album) => 
           !!album && (
-            <Card key={album?.id!}>
-              <CardImage src={album?.cover!} alt={album?.title as any}/>
-              <CardBody >
-                <CardText>{album?.title}</CardText>
-                <CardFooter>By {album?.artist?.name}</CardFooter>
-              </CardBody>
+            <Card key={album.id!}>
+              <Albums
+                id={album?.id!}
+                title={album?.title!}
+                cover={album?.cover!}
+                artist={album?.artist?.name!}
+                handleId={handleId}
+              />
             </Card>
           )
           )}
@@ -107,8 +98,6 @@ interface  ITracks extends OwnProps {
 
 const Tracks: React.FC<ITracks> = ({ id, title, artist, picture, preview, handleId }) => {
   const { isShown, toggle } = useModal()
- 
-
   return (
     <>
       <CardImage src={picture} alt={title} onClick={toggle}/>
@@ -121,40 +110,45 @@ const Tracks: React.FC<ITracks> = ({ id, title, artist, picture, preview, handle
     </>
   )
 }
-/* 
-interface  ITracks {
-  title: string;
-  artist: {
-    name: string;
-    picture: string;
-  }
-  
+
+interface IAlbums extends OwnProps {
+  id: string,
+  title: string,
+  cover: string,
+  artist: string,
 }
 
-const Tracks: React.FC<ITracks> = ({ title, artist }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
+const Albums: React.FC<IAlbums> = ({ id, title, cover, artist, handleId }) => {
+  const { isShown, toggle } = useModal()
   return (
     <>
-      <CardImage src={artist.picture} alt={artist.name}/>
-      <CardBody onClick={() => setIsModalOpen(true)}>
-        <CardText>{title}</CardText>
-        <CardFooter>by {artist.name}</CardFooter>
+      <CardImage src={cover} alt={title} onClick={toggle}/>
+      <CardBody>
+        <CardText onClick={() => handleId(id)}>{title}</CardText>
+        <CardFooter>By: {artist}</CardFooter>
+        <Modal isShown={isShown} hide={toggle} modalContent={
+          <Album id={id}/>} />
       </CardBody>
-      
-      {isModalOpen &&
-        <Modal onClose={() => setIsModalOpen(false)}>
-          <ModalWrapper>
-          <CloseModal><span aria-hidden="true">&times;</span></CloseModal>
-            <ModalContainer>
-              <ModalContent>
-                <ModalHeader>{title}</ModalHeader>
-              </ModalContent>
-            </ModalContainer>
-          </ModalWrapper>
-        </Modal>
-      }
     </>
   )
+}
 
-} */
+interface IArtist extends OwnProps {
+  id: string,
+  name: string,
+  picture_big: string,
+}
+
+const Artists: React.FC<IArtist> = ({id, name, picture_big, handleId}) => {
+  const { isShown, toggle } = useModal()
+  return (
+    <>
+      <CardImage src={picture_big} alt={name} onClick={toggle}/>
+      <CardBody>
+        <CardText onClick={() => handleId(id)}>{name}</CardText>
+        <Modal isShown={isShown} hide={toggle} modalContent={
+          <Artist id={id}/>} />
+      </CardBody>
+    </>
+  )
+}

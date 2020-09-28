@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
-import { useTrackInfoQuery } from '../../generated/graphql'
-import Track from './Track'
+import { useAlbumDetailQuery } from '../../generated/graphql'
+import Album from './Album'
 import { Row } from '../../Styles'
 import ModalSpinner from '../ModalSpinner'
 
 interface OwnProps {
   id: string
 }
-const TrackContainer = ({id}: OwnProps) => {
-  const {data, error, loading, refetch} = useTrackInfoQuery({
+const AlbumContainer = ({id}: OwnProps) => {
+  const {data, error, loading, refetch }  = useAlbumDetailQuery({
     variables: { id: String(id)}
   });
 
@@ -25,12 +25,10 @@ const TrackContainer = ({id}: OwnProps) => {
   }
 
   if (error || !data) {
-    return <div>Error :(</div>
+    return <div>Error</div>
   }
   console.log(data)
-  return (
-    <Track data={data}/>
-  )
+  return <Album data={data}/>
 }
 
-export default TrackContainer
+export default AlbumContainer

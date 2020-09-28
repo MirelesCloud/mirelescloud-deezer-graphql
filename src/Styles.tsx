@@ -162,6 +162,36 @@ export const Card = styled('div')`
     }
 `
 
+export const Track = styled('div')`
+    position: relative;
+    flex-basis: 100%;
+    flex-basis: calc(10% - 5px);
+    margin: 10px;
+    cursor: pointer;
+    transition: 0.3s all ease-in;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.09);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    
+
+    @media (max-width: 992px) {
+      flex-basis: calc( 33.333% - 20px);
+    }
+
+    @media (max-width: 600px) {
+      flex-basis: calc(50% - 20px)
+    }
+
+    &:hover {
+      box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2);
+    }
+`
+
 export const CardBody = styled('div')`
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
@@ -242,6 +272,7 @@ export const ModalWrapper = styled.div`
 export const ModalContainer = styled.div`
   position: relative;
   z-index: 0;
+  padding-bottom: 20px;
   
 `
 export const ModalContent = styled.div`
@@ -259,14 +290,43 @@ export const Row = styled.div`
  
 `
 export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   float: left;
-  margin: 0 10px;
   width: 50%;
   padding: 0;
+  align-items: center;
+  justify-content: center;
 
   @media(max-width: 378px) {
     width: 100%;
   }
+`
+export const Table = styled.table`
+  width: 100%;
+`
+export const TableBody = styled.tbody`
+  
+  
+`
+
+export const TableRow = styled.tr`
+  
+`
+
+export const TableCell = styled.td`
+ font-size: 0.8em;
+ padding-left: 20px;
+ 
+
+`
+export const Duration = styled.td`
+  font-size: 0.7em;
+  margin-left: auto;
+`
+export const Preview = styled.td`
+  align: right;
 `
 
 export const ModalHeader = styled.h2`
@@ -320,32 +380,7 @@ export const ImageSmall = styled.img`
   margin-left: auto;
   margin-right: auto;
 `
-//* New Modal *//
-export const Wrapper = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 700;
-  width: inherit;
-  outline: 0;
-`;
-export const Backdrop = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 500;
-`;
-export const StyledModal = styled.div`
-  z-index: 100;
-  background: white;
-  position: relative;
-  margin: auto;
-  border-radius: 8px;
-`;
+
 export const Header = styled.div`
   background-image: linear-gradient(to bottom right, purple, green, yellow);
   border-radius: 8px 8px 0 0;
@@ -376,7 +411,7 @@ export const Content = styled.div`
 
 /*Icons */
 export const PlayContainer = styled.div`
-  margin: 20px 20px;
+  
 `
 
 export const Play = styled(PlayCircle)`
@@ -392,6 +427,28 @@ export const Play = styled(PlayCircle)`
 
 export const Pause = styled(PauseCircle)`
   width: 2rem;
+  height: auto;
+  :hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: transform .5s;
+    
+  }
+`
+
+export const PlaySmall = styled(PlayCircle)`
+  width: 1.5em;
+  height: auto;
+  :hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: transform .5s;
+    
+  }
+`
+
+export const PauseSmall = styled(PauseCircle)`
+  width: 1.5em;
   height: auto;
   :hover {
     cursor: pointer;
