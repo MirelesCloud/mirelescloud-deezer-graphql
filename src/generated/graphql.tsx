@@ -120,6 +120,7 @@ export type Track = {
   preview?: Maybe<Scalars['String']>,
   artist?: Maybe<Artist>,
   album?: Maybe<Album>,
+  explicit?: Maybe<Scalars['Boolean']>,
 };
 
 export type Tracks = {
@@ -132,6 +133,7 @@ export type Tracks = {
   album?: Maybe<Albums>,
   position?: Maybe<Scalars['Int']>,
   duration?: Maybe<Scalars['Int']>,
+  explicit?: Maybe<Scalars['Boolean']>,
 };
 
 
@@ -150,7 +152,7 @@ export type AlbumDetailQuery = (
       & Pick<Artist, 'id' | 'name' | 'picture'>
     )>, tracks: Maybe<Array<Maybe<(
       { __typename?: 'Tracks' }
-      & Pick<Tracks, 'id' | 'title' | 'preview' | 'duration'>
+      & Pick<Tracks, 'id' | 'title' | 'preview' | 'duration' | 'explicit'>
     )>>> }
   )> }
 );
@@ -164,7 +166,7 @@ export type ArtistDetailQuery = (
   { __typename?: 'Query' }
   & { artist: Maybe<(
     { __typename?: 'Artist' }
-    & Pick<Artist, 'id' | 'name' | 'picture' | 'nb_album' | 'nb_fan'>
+    & Pick<Artist, 'id' | 'name' | 'picture' | 'nb_album' | 'nb_fan' | 'tracklist'>
   )> }
 );
 
@@ -177,7 +179,7 @@ export type ChartListQuery = (
     { __typename?: 'Chart' }
     & { tracks: Maybe<Array<Maybe<(
       { __typename?: 'Tracks' }
-      & Pick<Tracks, 'id' | 'title' | 'preview'>
+      & Pick<Tracks, 'id' | 'title' | 'preview' | 'explicit'>
       & { artist: Maybe<(
         { __typename?: 'Artists' }
         & Pick<Artists, 'picture' | 'name'>
@@ -205,7 +207,7 @@ export type TrackInfoQuery = (
   { __typename?: 'Query' }
   & { track: Maybe<(
     { __typename?: 'Track' }
-    & Pick<Track, 'id' | 'title' | 'duration' | 'release_date' | 'preview' | 'rank'>
+    & Pick<Track, 'id' | 'title' | 'duration' | 'release_date' | 'preview' | 'rank' | 'explicit'>
     & { artist: Maybe<(
       { __typename?: 'Artist' }
       & Pick<Artist, 'id' | 'name' | 'picture' | 'picture_medium' | 'picture_big'>
@@ -240,6 +242,7 @@ export const AlbumDetailDocument = gql`
       title
       preview
       duration
+      explicit
     }
   }
 }
@@ -295,6 +298,7 @@ export const ArtistDetailDocument = gql`
     picture
     nb_album
     nb_fan
+    tracklist
   }
 }
     `;
@@ -348,6 +352,7 @@ export const ChartListDocument = gql`
       id
       title
       preview
+      explicit
       artist {
         picture
         name
@@ -421,6 +426,7 @@ export const TrackInfoDocument = gql`
     release_date
     preview
     rank
+    explicit
     artist {
       id
       name

@@ -260,6 +260,12 @@ export const Dialog = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
+
+  @media(max-width: 378px) {
+    top: 50%;
+    width: 80%;
+  }
+
   
 `
 
@@ -305,9 +311,10 @@ export const Column = styled.div`
 `
 export const Table = styled.table`
   width: 100%;
+  margin: 0 15px;
+ 
 `
 export const TableBody = styled.tbody`
-  
   
 `
 
@@ -318,8 +325,12 @@ export const TableRow = styled.tr`
 export const TableCell = styled.td`
  font-size: 0.8em;
  padding-left: 20px;
- 
 
+`
+
+export const ExplicitCell = styled.td`
+  font-size: 0.6em;
+  font-style: oblique;
 `
 export const Duration = styled.td`
   font-size: 0.7em;
@@ -411,7 +422,7 @@ export const Content = styled.div`
 
 /*Icons */
 export const PlayContainer = styled.div`
-  
+  padding: 10px;
 `
 
 export const Play = styled(PlayCircle)`
@@ -456,4 +467,12 @@ export const PauseSmall = styled(PauseCircle)`
     transition: transform .5s;
     
   }
+`
+export const Explicit = styled.div`
+  background-color: #f2f2f2;
+  border: 1px solid #737373;
+  padding: 2px 5px;
+  margin-top: 10px;
+  font-size: 0.6em;
+  font-style: oblique;
 `

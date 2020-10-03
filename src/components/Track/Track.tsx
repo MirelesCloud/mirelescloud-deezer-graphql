@@ -15,6 +15,7 @@ import {
   PlayContainer,
   Play,
   Pause,
+  Explicit,
 } from '../../Styles'
 
 interface Props {
@@ -22,7 +23,7 @@ interface Props {
 }
 const Track: React.FC<Props> = ({ data  }) => {
   console.log(data)
-  const { title, preview, release_date, artist, album } = data?.track!
+  const { title, preview, release_date, artist, album, explicit } = data?.track!
 
   const [audio] = useState(new Audio(preview!))
   const [play, setPlay] = useState(false)
@@ -47,6 +48,7 @@ const Track: React.FC<Props> = ({ data  }) => {
               <PlayContainer onClick={togglePlay}>
                 {play ? <Pause/> : <Play/>}
               </PlayContainer>
+              {explicit ? <Explicit>Explicit</Explicit> : ""}
             </Column>
           </Row>
           <hr/>

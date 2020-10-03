@@ -9,6 +9,7 @@ export const QUERY_TRACK_PROFILE = gql`
       release_date
       preview
       rank
+      explicit
       artist {
         id
         name

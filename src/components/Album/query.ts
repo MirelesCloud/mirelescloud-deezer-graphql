@@ -13,6 +13,7 @@ export const QUERY_ALBUM = gql`
       rating
       fans
       release_date
+      
       artist {
         id
         name
@@ -23,6 +24,7 @@ export const QUERY_ALBUM = gql`
         title 
         preview
         duration
+        explicit
       }
     }
   }

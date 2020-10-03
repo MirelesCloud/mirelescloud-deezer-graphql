@@ -25,7 +25,6 @@ interface Props extends OwnProps {
 }
 
 const ChartList: React.FC<Props> = ({ data, handleId }) => {
-  console.log(data)
   return (
     <div>
       <CategoryHeader>Top Tracks</CategoryHeader>
@@ -40,6 +39,7 @@ const ChartList: React.FC<Props> = ({ data, handleId }) => {
               artist={track?.artist?.name!} 
               picture={track?.artist?.picture!}
               preview={track?.preview!}
+              explicit={track?.explicit!}
               handleId={handleId}
               />
             </Card>
@@ -54,11 +54,6 @@ const ChartList: React.FC<Props> = ({ data, handleId }) => {
           !!artist && (
             <Card key={artist?.id!}>
               <Artists id={artist?.id!} name={artist?.name!} picture_big={artist?.picture!} handleId={handleId}/>
-              {/* <CardImage src={artist?.picture!} alt={artist?.name as any}/>
-              <CardBody >
-                <CardText>{artist?.name}</CardText>
-                <CardFooter>No {artist?.position}</CardFooter>
-              </CardBody> */}
             </Card>
           )
           )}
@@ -92,11 +87,11 @@ interface  ITracks extends OwnProps {
   title: string;
   artist: string;
   picture: string;
-  preview: string
-  
+  preview: string;
+  explicit: boolean;
 }
 
-const Tracks: React.FC<ITracks> = ({ id, title, artist, picture, preview, handleId }) => {
+const Tracks: React.FC<ITracks> = ({ id, title, artist, picture, preview, explicit, handleId }) => {
   const { isShown, toggle } = useModal()
   return (
     <>

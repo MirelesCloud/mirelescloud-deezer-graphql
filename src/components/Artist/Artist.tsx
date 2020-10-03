@@ -1,5 +1,6 @@
-import React  from 'react'
+import React from 'react'
 import { ArtistDetailQuery } from '../../generated/graphql'
+import { formatNum } from '../../NumberFormat'
 import {
   ModalWrapper, 
   ModalContainer,
@@ -11,8 +12,6 @@ import {
   Column,
 } from '../../Styles'
 
-
-
 interface Props {
   data: ArtistDetailQuery
 }
@@ -20,10 +19,6 @@ interface Props {
 const Artist: React.FC<Props> = ({ data }) => {
   console.log(data)
   const { name, picture, nb_album, nb_fan } = data?.artist!
-  
-  function formatNum(i: number) {
-    return i.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-  }
 
   return (
     <ModalWrapper>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { AlbumDetailQuery } from '../../generated/graphql'
+import { formatNum } from '../../NumberFormat'
 import {
   ModalWrapper, 
   ModalContainer,
@@ -18,31 +19,22 @@ import {
   Preview,
   PlaySmall,
   PauseSmall,
+  ExplicitCell,
 } from '../../Styles'
 
 interface Props {
   data: AlbumDetailQuery
 }
 const Album: React.FC<Props> = ({ data }) => {
-  const { title, cover_big, artist, label, release_date, tracks } = data?.album!
- 
-  const [audio, setAudio] = useState(new Audio(""))
-  const [play, setPlay] = useState(false)
-  const togglePlay = () => setPlay(!play)
-
-  useEffect(() => {
-    play ? audio.play() : audio.pause()
-  },
-    [play, audio]
-  )
-
-  function minutes(time: number) {
-    let min = Math.floor(time/60);
-    let sec = time - min * 60;
-    
-    return min + " : " + sec
-  }
-
+  const { 
+    title, 
+    cover_big, 
+    artist, 
+    label, 
+    release_date, 
+    tracks, 
+    fans, 
+    nb_tracks } = data?.album!
   return (
     <ModalWrapper>
       <ModalContainer>
@@ -57,6 +49,8 @@ const Album: React.FC<Props> = ({ data }) => {
               <br/>
               <ModalTextSm>Label: {label}</ModalTextSm>
               <ModalTextSm>Rel.:{release_date}</ModalTextSm>
+              <ModalTextSm>Tracks:{nb_tracks}</ModalTextSm>
+              <ModalTextSm>Fans:{formatNum(fans!)}</ModalTextSm>
             </Column>
           </Row>
           <hr/>
@@ -65,14 +59,12 @@ const Album: React.FC<Props> = ({ data }) => {
               <TableBody>
                 {tracks?.map(track => (
                   <TableRow key={track?.id}>
-                    <TableCell>{track?.title}</TableCell>
-                    <Duration>{minutes(track?.duration!)}</Duration>
-                    <Preview  onClick={() => {
-                      setAudio(new Audio(track?.preview!));
-                      togglePlay();
-                    }}>
-                        {play ? <PauseSmall/> : <PlaySmall/>}
-                    </Preview>
+                    <TrackPreview 
+                      title={track?.title!} 
+                      duration={track?.duration!} 
+                      preview={track?.preview!}
+                      explicit={track?.explicit!} 
+                    />
                   </TableRow>
                 ))}
               </TableBody>
@@ -81,6 +73,48 @@ const Album: React.FC<Props> = ({ data }) => {
         </ModalContent>
       </ModalContainer>
     </ModalWrapper>
+  )
+}
+
+interface ITrackPreview {
+  title: string;
+  duration: number;
+  preview: string;
+  explicit: boolean
+}
+
+const TrackPreview: React.FC<ITrackPreview> = ({ title, duration, preview, explicit}) => {
+
+  const [audio] = useState(new Audio(preview!))
+  const [play, setPlay] = useState(false)
+  const togglePlay = () => setPlay(!play)
+
+  useEffect(() => {
+    
+    play ? audio.play() : audio.pause()
+  },
+    [play, audio]
+  )
+
+  function minutes(time: number) {
+    let min = Math.floor(time/60);
+    let sec = time - min * 60;
+    if (sec < 10) {
+      return `${min}:0${sec}`
+    }
+    
+    return `${min}:${sec}`
+  }
+
+  return (
+    <>
+      <TableCell>{title}</TableCell>
+      {explicit ? <ExplicitCell>Explicit</ExplicitCell> : <ExplicitCell></ExplicitCell>}
+      <Duration>{minutes(duration)}</Duration>
+      <Preview onClick={togglePlay}>
+        {play ? <PauseSmall/> : <PlaySmall/>}
+      </Preview>
+    </>
   )
 }
 

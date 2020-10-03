@@ -8,6 +8,7 @@ export const QUERY_ARTIST = gql`
       picture
       nb_album
       nb_fan
+      tracklist
     }
   }
 `
