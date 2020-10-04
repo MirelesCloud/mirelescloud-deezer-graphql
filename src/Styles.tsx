@@ -114,7 +114,7 @@ export const MainContainer = styled('div')`
 `
 
 export const ContentWrapper = styled('div')`
-  margin-top: 50px;
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
 `
@@ -128,8 +128,9 @@ export const Footer = styled.footer`
   background-color: #cccccc;
   text-align: center;
 `
-export const CategoryHeader = styled.h2`
-  font-weight: 300;
+export const CategoryHeader = styled.h3`
+  font-weight: 400;
+  margin-top: 30px;
 `
 /* Card */
 export const Card = styled('div')`
@@ -304,13 +305,25 @@ export const Column = styled.div`
   padding: 0;
   align-items: center;
   justify-content: center;
+  
 
   @media(max-width: 378px) {
     width: 100%;
   }
 `
+export const Sticky = styled.div`
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%
+`
+
+export const Scroll = styled.div`
+  margin-top: 30px;
+  height: 100%
+`
 export const Table = styled.table`
-  width: 100%;
+  width: 95%;
   margin: 0 15px;
  
 `
@@ -343,6 +356,8 @@ export const Preview = styled.td`
 export const ModalHeader = styled.h2`
   font-weight: 400;
   margin-bottom: 3px;
+  
+
 `
 export const ModalSubHeader = styled.h4`
   font-weight: 300;
@@ -357,6 +372,7 @@ export const ModalText = styled.div`
 export const ModalTextSm = styled.div`
   font-size: 0.8rem;
   font-weight: 300;
+  padding: 5px;
 `
 export const CloseModal = styled.p`
   position: absolute;

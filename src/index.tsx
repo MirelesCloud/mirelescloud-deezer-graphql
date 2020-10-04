@@ -8,7 +8,7 @@ import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 
 const client = new ApolloClient({
-  uri: 'https://mirelescloud-deezer-server.herokuapp.com/'
+  uri: 'http://localhost:4000' /*https://mirelescloud-deezer-server.herokuapp.com/' */
 })
 
 ReactDOM.render(

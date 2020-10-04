@@ -15,8 +15,6 @@ import Track from '../Track'
 import Album from '../Album/Index'
 import Artist from '../Artist/Index'
 
-
-
 export interface OwnProps {
   handleId: (newId: string) => void
 }
@@ -32,7 +30,7 @@ const ChartList: React.FC<Props> = ({ data, handleId }) => {
         {!!data.chart &&
           data.chart.tracks!.map((track) => 
           !!track && (
-              <Card key={track.id!} >
+            <Card key={track.id!} >
               <Tracks
               id={track?.id!}
               title={track?.title!} 

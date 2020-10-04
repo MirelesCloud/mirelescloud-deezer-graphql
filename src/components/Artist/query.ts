@@ -6,9 +6,16 @@ export const QUERY_ARTIST = gql`
       id
       name
       picture
+      picture_big
       nb_album
       nb_fan
-      tracklist
+      tracklist {
+        id
+        title
+        preview
+        duration
+        explicit
+      }
     }
   }
 `

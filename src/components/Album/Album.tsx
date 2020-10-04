@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { AlbumDetailQuery } from '../../generated/graphql'
-import { formatNum } from '../../NumberFormat'
+import { formatNum, minutes } from '../../AuxFunction'
 import {
   ModalWrapper, 
   ModalContainer,
@@ -11,6 +11,7 @@ import {
   Image,
   Row,
   Column,
+  
   Table,
   TableBody,
   TableRow,
@@ -25,6 +26,7 @@ import {
 interface Props {
   data: AlbumDetailQuery
 }
+
 const Album: React.FC<Props> = ({ data }) => {
   const { 
     title, 
@@ -48,9 +50,9 @@ const Album: React.FC<Props> = ({ data }) => {
               <ModalText>By: {artist?.name}</ModalText>
               <br/>
               <ModalTextSm>Label: {label}</ModalTextSm>
-              <ModalTextSm>Rel.:{release_date}</ModalTextSm>
-              <ModalTextSm>Tracks:{nb_tracks}</ModalTextSm>
-              <ModalTextSm>Fans:{formatNum(fans!)}</ModalTextSm>
+              <ModalTextSm>Rel.: {release_date}</ModalTextSm>
+              <ModalTextSm>Tracks: {nb_tracks}</ModalTextSm>
+              <ModalTextSm>Fans: {formatNum(fans!)}</ModalTextSm>
             </Column>
           </Row>
           <hr/>
@@ -84,27 +86,15 @@ interface ITrackPreview {
 }
 
 const TrackPreview: React.FC<ITrackPreview> = ({ title, duration, preview, explicit}) => {
-
   const [audio] = useState(new Audio(preview!))
   const [play, setPlay] = useState(false)
   const togglePlay = () => setPlay(!play)
 
   useEffect(() => {
-    
     play ? audio.play() : audio.pause()
   },
     [play, audio]
   )
-
-  function minutes(time: number) {
-    let min = Math.floor(time/60);
-    let sec = time - min * 60;
-    if (sec < 10) {
-      return `${min}:0${sec}`
-    }
-    
-    return `${min}:${sec}`
-  }
 
   return (
     <>

@@ -53,7 +53,7 @@ export type Artist = {
   picture_big?: Maybe<Scalars['String']>,
   nb_album?: Maybe<Scalars['Int']>,
   nb_fan?: Maybe<Scalars['Int']>,
-  tracklist?: Maybe<Scalars['String']>,
+  tracklist?: Maybe<Array<Maybe<Tracks>>>,
 };
 
 export type Artists = {
@@ -166,7 +166,11 @@ export type ArtistDetailQuery = (
   { __typename?: 'Query' }
   & { artist: Maybe<(
     { __typename?: 'Artist' }
-    & Pick<Artist, 'id' | 'name' | 'picture' | 'nb_album' | 'nb_fan' | 'tracklist'>
+    & Pick<Artist, 'id' | 'name' | 'picture' | 'picture_big' | 'nb_album' | 'nb_fan'>
+    & { tracklist: Maybe<Array<Maybe<(
+      { __typename?: 'Tracks' }
+      & Pick<Tracks, 'id' | 'title' | 'preview' | 'duration' | 'explicit'>
+    )>>> }
   )> }
 );
 
@@ -296,9 +300,16 @@ export const ArtistDetailDocument = gql`
     id
     name
     picture
+    picture_big
     nb_album
     nb_fan
-    tracklist
+    tracklist {
+      id
+      title
+      preview
+      duration
+      explicit
+    }
   }
 }
     `;

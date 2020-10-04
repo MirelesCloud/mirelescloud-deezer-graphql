@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { TrackInfoQuery } from '../../generated/graphql'
+import { minutes } from '../../AuxFunction'
 import {
   ModalWrapper, 
   ModalContainer,
@@ -23,7 +24,15 @@ interface Props {
 }
 const Track: React.FC<Props> = ({ data  }) => {
   console.log(data)
-  const { title, preview, release_date, artist, album, explicit } = data?.track!
+  const { 
+    title, 
+    preview, 
+    release_date, 
+    artist, 
+    album, 
+    explicit, 
+    duration, 
+     } = data?.track!
 
   const [audio] = useState(new Audio(preview!))
   const [play, setPlay] = useState(false)
@@ -45,6 +54,7 @@ const Track: React.FC<Props> = ({ data  }) => {
             <Column>
               <ModalHeader>{title}</ModalHeader>
               <ModalText>By: {artist?.name}</ModalText>
+              <ModalTextSm>{minutes(duration!)} min.</ModalTextSm>
               <PlayContainer onClick={togglePlay}>
                 {play ? <Pause/> : <Play/>}
               </PlayContainer>
@@ -52,7 +62,6 @@ const Track: React.FC<Props> = ({ data  }) => {
             </Column>
           </Row>
           <hr/>
-          
           <Row>
             <Column>
             <ModalCategory>Album</ModalCategory>
