@@ -11,6 +11,7 @@ export const Nav = styled('div')`
     background-image: linear-gradient(to bottom right, purple, green, yellow);
     border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
 `
 
 export const NavHeader = styled('div')`
@@ -264,10 +265,8 @@ export const Dialog = styled.div`
 
   @media(max-width: 378px) {
     top: 50%;
-    width: 80%;
+    width: 85%;
   }
-
-  
 `
 
 export const ModalWrapper = styled.div`
