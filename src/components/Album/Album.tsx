@@ -11,7 +11,7 @@ import {
   Image,
   Row,
   Column,
-  
+  CategoryHeader,
   Table,
   TableBody,
   TableRow,
@@ -56,6 +56,7 @@ const Album: React.FC<Props> = ({ data }) => {
             </Column>
           </Row>
           <hr/>
+          <CategoryHeader>Album Tracks</CategoryHeader>
           <Row>
             <Table>
               <TableBody>

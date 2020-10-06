@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { ArtistDetailQuery } from '../../generated/graphql'
 import { formatNum, minutes } from '../../AuxFunction'
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 import {
   ModalWrapper, 
   ModalContainer,
@@ -10,14 +12,12 @@ import {
   Image,
   Row,
   Column,
+  CategoryHeader,
   Table,
   TableBody,
   TableRow,
   TableCell,
   Duration,
-  Preview,
-  PlaySmall,
-  PauseSmall,
   ExplicitCell,
 } from '../../Styles'
 
@@ -44,7 +44,9 @@ const Artist: React.FC<Props> = ({ data }) => {
             </Column>
           </Row>
           <hr/>
+          <CategoryHeader>Artist Tracks</CategoryHeader>
           <Row>
+            
             <Table>
               <TableBody>
                 {tracklist!.map(track => (
@@ -91,9 +93,12 @@ const TrackPreview: React.FC<ITrackPreview> = ({ title, duration, preview, expli
       <TableCell>{title}</TableCell>
       {explicit ? <ExplicitCell>Explicit</ExplicitCell> : <ExplicitCell></ExplicitCell>}
       <Duration>{minutes(duration)}</Duration>
-      <Preview onClick={togglePlay}>
-        {play ? <PauseSmall/> : <PlaySmall/>}
-      </Preview>
+      <TableCell>
+        <AudioPlayer 
+          onPlay={togglePlay}
+          src={preview!}
+        />
+      </TableCell>
     </>
   )
 }

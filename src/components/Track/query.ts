@@ -21,6 +21,7 @@ export const QUERY_TRACK_PROFILE = gql`
         id
         title
         cover
+        cover_small
         cover_big
       }
     }

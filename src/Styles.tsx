@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import { PlayCircle, PauseCircle } from '@emotion-icons/boxicons-regular'
+import { PlayCircle, PauseCircle, Heart } from '@emotion-icons/boxicons-regular'
 import { CloseCircleOutline } from '@emotion-icons/evaicons-outline'
-
+import { HeartFill } from '@emotion-icons/bootstrap/HeartFill'
 export const PageContainer = styled.div`
   position: relative;
   min-height: 100vh;
@@ -129,9 +129,10 @@ export const Footer = styled.footer`
   background-color: #cccccc;
   text-align: center;
 `
-export const CategoryHeader = styled.h3`
+export const CategoryHeader = styled.h5`
   font-weight: 400;
   margin-top: 30px;
+  margin-bottom: 5px;
 `
 /* Card */
 export const Card = styled('div')`
@@ -198,7 +199,7 @@ export const CardBody = styled('div')`
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 1rem;
+  padding: 0.5rem 0.8rem 0 0.8rem;
 `
 
 export const CardImage = styled('img')`
@@ -220,8 +221,13 @@ export const CardText = styled('p')`
   font-size: 1rem;
 `
 
-export const CardFooter = styled('p')`
-  margin: 5px 1px;
+export const CardFooter = styled('div')`
+  border: none;
+  display: inline-block;
+  padding-left: 0.8rem;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  with: 100%;
   font-size: 0.8rem;
 `
 
@@ -255,17 +261,22 @@ export const Overlay = styled.div`
 `
 
 export const Dialog = styled.div`
-  background: white;
-  border-radius: 8px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
+  background-color:white;
+  height: 100%;
+  position:relative;
+  margin:0 auto;
+  overflow-y: scroll;
+  padding: 0; 
+  border-radius: 8px 8px 0 0;
+  -webkit-overflow-scrolling: touch;
+  
 
-  @media(max-width: 378px) {
-    top: 50%;
-    width: 85%;
+  @media (min-width: 60em) {
+    height:75%;
+  margin:5% auto;
+  max-height: 57em;
+    max-width:66em;
+    width:85%;
   }
 `
 
@@ -277,8 +288,11 @@ export const ModalWrapper = styled.div`
 
 export const ModalContainer = styled.div`
   position: relative;
+  flex-basis: 100%;
+  transition: 0.3s all ease-in;
   z-index: 0;
-  padding-bottom: 20px;
+  margin: 0 30px;
+  padding-bottom: 5px;
   
 `
 export const ModalContent = styled.div`
@@ -292,22 +306,25 @@ export const ModalContent = styled.div`
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
  
 `
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  float: left;
-  width: 50%;
+  flex-basis: 100%;
   padding: 0;
   align-items: center;
-  justify-content: center;
+  text-align: justify;
+  
   
 
-  @media(max-width: 378px) {
+  @media screen and (min-width: 600px) {
     width: 100%;
+    flex: 1;
   }
 `
 export const Sticky = styled.div`
@@ -352,26 +369,29 @@ export const Preview = styled.td`
   align: right;
 `
 
-export const ModalHeader = styled.h2`
+export const LikeCell = styled.td`
+
+`
+
+export const ModalHeader = styled.h3`
   font-weight: 400;
   margin-bottom: 3px;
-  
-
 `
 export const ModalSubHeader = styled.h4`
   font-weight: 300;
 `
 export const ModalCategory = styled.h5`
   font-weight: 500;
+  margin-bottom: 5px;
+  margin-top: 5px;
 `
 export const ModalText = styled.div`
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 300;
 `
 export const ModalTextSm = styled.div`
   font-size: 0.8rem;
   font-weight: 300;
-  padding: 5px;
 `
 export const CloseModal = styled.p`
   position: absolute;
@@ -400,11 +420,7 @@ export const Image = styled.img`
 `
 
 export const ImageSmall = styled.img`
-  margin-top: 20px;
-  width: 120px;
-  height: auto;
-  margin-left: auto;
-  margin-right: auto;
+  
 `
 
 export const Header = styled.div`
@@ -430,7 +446,7 @@ export const CloseButton = styled(CloseCircleOutline)`
 `;
 export const Content = styled.div`
   padding: 5px;
-  max-height: 50rem;
+  max-height: 80rem;
   overflow-x: hidden;
   overflow-y: auto;
 `;
@@ -490,4 +506,23 @@ export const Explicit = styled.div`
   margin-top: 10px;
   font-size: 0.6em;
   font-style: oblique;
+`
+
+export const LikeContainer = styled.div`
+  float: right;
+  margin-right: 5px;
+`
+export const HeartOutline = styled(Heart)`
+  color: #ccccc;
+  width: 1rem;
+  height: auto;
+  padding: 0;
+`
+
+export const HeartLiked = styled(HeartFill)`
+  color: red;
+  width: 1rem;
+  height: auto;
+  padding: 0;
+  
 `

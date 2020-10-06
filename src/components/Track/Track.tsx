@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { TrackInfoQuery } from '../../generated/graphql'
 import { minutes } from '../../AuxFunction'
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 import {
   ModalWrapper, 
   ModalContainer,
-  ModalContent,
   ModalHeader,
-  ModalCategory,
   ModalText,
   ModalTextSm,
   Image,
   ImageSmall,
   Row,
   Column,
-  PlayContainer,
-  Play,
-  Pause,
   Explicit,
 } from '../../Styles'
 
@@ -34,45 +31,40 @@ const Track: React.FC<Props> = ({ data  }) => {
     duration, 
      } = data?.track!
 
-  const [audio] = useState(new Audio(preview!))
+
+  /* const [audio] = useState(new Audio(preview!)) */
   const [play, setPlay] = useState(false)
   const togglePlay = () => setPlay(!play)
   
-  useEffect(() => {
+ /*  useEffect(() => {
     play ? audio.play() : audio.pause()
   },
     [play, audio]
-  )
+  ) */
+
   return (
     <ModalWrapper>
       <ModalContainer>
-        <ModalContent>
+       
           <Row>
             <Column>
               <Image src={artist?.picture_big!}/>
+              <AudioPlayer 
+                onPlay={togglePlay} 
+                src={preview!}
+                />
             </Column>
             <Column>
               <ModalHeader>{title}</ModalHeader>
               <ModalText>By: {artist?.name}</ModalText>
               <ModalTextSm>{minutes(duration!)} min.</ModalTextSm>
-              <PlayContainer onClick={togglePlay}>
-                {play ? <Pause/> : <Play/>}
-              </PlayContainer>
               {explicit ? <Explicit>Explicit</Explicit> : ""}
+              <ModalTextSm style={{alignItems: "center"}}><strong>Album: </strong>{album?.title!} </ModalTextSm>
+              <ModalTextSm>{release_date}</ModalTextSm>
+              <ImageSmall src={album?.cover!}/> 
             </Column>
           </Row>
-          <hr/>
-          <Row>
-            <Column>
-            <ModalCategory>Album</ModalCategory>
-              <ModalText>{album?.title}</ModalText>
-              <ModalTextSm>Rel: {release_date}</ModalTextSm>
-            </Column>
-            <Column>
-              <ImageSmall src={album?.cover!}/>
-            </Column>
-          </Row>
-        </ModalContent>
+      
       </ModalContainer>
     </ModalWrapper>
   )

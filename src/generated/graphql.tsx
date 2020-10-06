@@ -23,6 +23,7 @@ export type Album = {
   title?: Maybe<Scalars['String']>,
   md5_image?: Maybe<Scalars['String']>,
   cover?: Maybe<Scalars['String']>,
+  cover_small?: Maybe<Scalars['String']>,
   cover_big?: Maybe<Scalars['String']>,
   cover_xl?: Maybe<Scalars['String']>,
   nb_tracks?: Maybe<Scalars['Int']>,
@@ -40,6 +41,7 @@ export type Albums = {
   id?: Maybe<Scalars['ID']>,
   title?: Maybe<Scalars['String']>,
   cover?: Maybe<Scalars['String']>,
+  cover_small?: Maybe<Scalars['String']>,
   artist?: Maybe<Artists>,
   position?: Maybe<Scalars['Int']>,
 };
@@ -217,7 +219,7 @@ export type TrackInfoQuery = (
       & Pick<Artist, 'id' | 'name' | 'picture' | 'picture_medium' | 'picture_big'>
     )>, album: Maybe<(
       { __typename?: 'Album' }
-      & Pick<Album, 'id' | 'title' | 'cover' | 'cover_big'>
+      & Pick<Album, 'id' | 'title' | 'cover' | 'cover_small' | 'cover_big'>
     )> }
   )> }
 );
@@ -449,6 +451,7 @@ export const TrackInfoDocument = gql`
       id
       title
       cover
+      cover_small
       cover_big
     }
   }

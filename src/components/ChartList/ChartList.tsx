@@ -14,6 +14,7 @@ import {useModal} from '../Modals/useModal'
 import Track from '../Track'
 import Album from '../Album/Index'
 import Artist from '../Artist/Index'
+import Like from '../LikeButton'
 
 export interface OwnProps {
   handleId: (newId: string) => void
@@ -23,6 +24,7 @@ interface Props extends OwnProps {
 }
 
 const ChartList: React.FC<Props> = ({ data, handleId }) => {
+  console.log(data?.chart?.artists)
   return (
     <div>
       <CategoryHeader>Top Tracks</CategoryHeader>
@@ -51,7 +53,12 @@ const ChartList: React.FC<Props> = ({ data, handleId }) => {
           data.chart.artists!.map((artist) => 
           !!artist && (
             <Card key={artist?.id!}>
-              <Artists id={artist?.id!} name={artist?.name!} picture_big={artist?.picture!} handleId={handleId}/>
+              <Artists 
+              id={artist?.id!} 
+              name={artist?.name!} 
+              picture_big={artist?.picture!}
+              position={artist?.position!} 
+              handleId={handleId}/>
             </Card>
           )
           )}
@@ -96,10 +103,10 @@ const Tracks: React.FC<ITracks> = ({ id, title, artist, picture, preview, explic
       <CardImage src={picture} alt={title} onClick={toggle}/>
       <CardBody >
         <CardText onClick={() => handleId(id)}>{title}</CardText>
-        <CardFooter>By {artist!}</CardFooter>
         <Modal isShown={isShown} hide={toggle} modalContent={
           <Track id={id}/>} />
       </CardBody>
+      <CardFooter>By: {artist!} <Like/></CardFooter>
     </>
   )
 }
@@ -118,10 +125,10 @@ const Albums: React.FC<IAlbums> = ({ id, title, cover, artist, handleId }) => {
       <CardImage src={cover} alt={title} onClick={toggle}/>
       <CardBody>
         <CardText onClick={() => handleId(id)}>{title}</CardText>
-        <CardFooter>By: {artist}</CardFooter>
         <Modal isShown={isShown} hide={toggle} modalContent={
           <Album id={id}/>} />
       </CardBody>
+      <CardFooter>By: {artist} <Like/></CardFooter>
     </>
   )
 }
@@ -130,9 +137,10 @@ interface IArtist extends OwnProps {
   id: string,
   name: string,
   picture_big: string,
+  position: number,
 }
 
-const Artists: React.FC<IArtist> = ({id, name, picture_big, handleId}) => {
+const Artists: React.FC<IArtist> = ({id, name, picture_big, position, handleId}) => {
   const { isShown, toggle } = useModal()
   return (
     <>
@@ -142,6 +150,7 @@ const Artists: React.FC<IArtist> = ({id, name, picture_big, handleId}) => {
         <Modal isShown={isShown} hide={toggle} modalContent={
           <Artist id={id}/>} />
       </CardBody>
+        <CardFooter>Position: {position} <Like/></CardFooter>
     </>
   )
 }
