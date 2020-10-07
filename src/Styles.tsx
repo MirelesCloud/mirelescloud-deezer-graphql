@@ -373,12 +373,13 @@ export const LikeCell = styled.td`
 
 `
 
-export const ModalHeader = styled.h3`
+export const ModalHeader = styled.h2`
   font-weight: 400;
-  margin-bottom: 3px;
+  margin: 3px;
 `
 export const ModalSubHeader = styled.h4`
   font-weight: 300;
+  margin: 3px;
 `
 export const ModalCategory = styled.h5`
   font-weight: 500;
@@ -388,10 +389,12 @@ export const ModalCategory = styled.h5`
 export const ModalText = styled.div`
   font-size: 1rem;
   font-weight: 300;
+  margin: 3px;
 `
 export const ModalTextSm = styled.div`
   font-size: 0.8rem;
   font-weight: 300;
+  margin: 3px;
 `
 export const CloseModal = styled.p`
   position: absolute;
@@ -409,6 +412,12 @@ export const CloseModal = styled.p`
   
 `
 
+export const TrackPreviewContainer = styled.div`
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 2px 3px 0 rgba(0,0,0,0.3);
+`
+
 export const Line = styled.hr`
   color: rgba(0, 0, 0, 0.7);
 `
@@ -420,7 +429,8 @@ export const Image = styled.img`
 `
 
 export const ImageSmall = styled.img`
-  
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,0.9);
+  margin: 5px
 `
 
 export const Header = styled.div`
@@ -502,8 +512,8 @@ export const PauseSmall = styled(PauseCircle)`
 export const Explicit = styled.div`
   background-color: #f2f2f2;
   border: 1px solid #737373;
-  padding: 2px 5px;
-  margin-top: 10px;
+  margin: 8px;
+  padding: 3px;
   font-size: 0.6em;
   font-style: oblique;
 `

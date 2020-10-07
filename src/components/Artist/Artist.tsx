@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { ArtistDetailQuery } from '../../generated/graphql'
 import { formatNum, minutes } from '../../AuxFunction'
 import AudioPlayer from 'react-h5-audio-player';
@@ -77,26 +77,21 @@ interface ITrackPreview {
 
 const TrackPreview: React.FC<ITrackPreview> = ({ title, duration, preview, explicit}) => {
 
-  const [audio] = useState(new Audio(preview!))
   const [play, setPlay] = useState(false)
   const togglePlay = () => setPlay(!play)
-
-  useEffect(() => {
-    
-    play ? audio.play() : audio.pause()
-  },
-    [play, audio]
-  )
-
+  
   return (
     <>
       <TableCell>{title}</TableCell>
       {explicit ? <ExplicitCell>Explicit</ExplicitCell> : <ExplicitCell></ExplicitCell>}
       <Duration>{minutes(duration)}</Duration>
       <TableCell>
-        <AudioPlayer 
+        <AudioPlayer
+          style={{maxWidth: "300px", height: "50px"}}
           onPlay={togglePlay}
           src={preview!}
+          showJumpControls={false}
+          layout={"horizontal"}
         />
       </TableCell>
     </>

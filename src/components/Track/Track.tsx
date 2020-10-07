@@ -7,10 +7,11 @@ import {
   ModalWrapper, 
   ModalContainer,
   ModalHeader,
+  ModalSubHeader,
   ModalText,
-  ModalTextSm,
   Image,
   ImageSmall,
+  TrackPreviewContainer,
   Row,
   Column,
   Explicit,
@@ -35,7 +36,7 @@ const Track: React.FC<Props> = ({ data  }) => {
   /* const [audio] = useState(new Audio(preview!)) */
   const [play, setPlay] = useState(false)
   const togglePlay = () => setPlay(!play)
-  
+  console.log(data)
  /*  useEffect(() => {
     play ? audio.play() : audio.pause()
   },
@@ -45,26 +46,27 @@ const Track: React.FC<Props> = ({ data  }) => {
   return (
     <ModalWrapper>
       <ModalContainer>
-       
           <Row>
             <Column>
-              <Image src={artist?.picture_big!}/>
-              <AudioPlayer 
-                onPlay={togglePlay} 
-                src={preview!}
-                />
+              <TrackPreviewContainer>
+                <Image src={artist?.picture_big!}/>
+                <AudioPlayer 
+                  onPlay={togglePlay} 
+                  src={preview!}
+                  />
+              </TrackPreviewContainer>
             </Column>
             <Column>
               <ModalHeader>{title}</ModalHeader>
-              <ModalText>By: {artist?.name}</ModalText>
-              <ModalTextSm>{minutes(duration!)} min.</ModalTextSm>
+              <ModalSubHeader>By: {artist?.name}</ModalSubHeader>
+              <ModalText><small>{minutes(duration!)} min.</small></ModalText>
               {explicit ? <Explicit>Explicit</Explicit> : ""}
-              <ModalTextSm style={{alignItems: "center"}}><strong>Album: </strong>{album?.title!} </ModalTextSm>
-              <ModalTextSm>{release_date}</ModalTextSm>
+              <hr style={{width: "50%"}}/>
+              <ModalText style={{alignItems: "center"}}><strong>Album: </strong>{album?.title!}</ModalText>
+              <ModalText><small>Rel.: {release_date}</small></ModalText>
               <ImageSmall src={album?.cover!}/> 
             </Column>
           </Row>
-      
       </ModalContainer>
     </ModalWrapper>
   )
