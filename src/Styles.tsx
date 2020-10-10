@@ -491,6 +491,10 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0.3rem;
+
+  @media and screen (max-width: 600px) {
+    height: 75px;
+  }
 `;
 
 
