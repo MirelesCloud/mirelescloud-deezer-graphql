@@ -378,7 +378,7 @@ export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
-  padding: 0 25px;
+  padding: 0 10px;
   align-items: center;
   text-align: justify;
 
@@ -492,6 +492,8 @@ export const Header = styled.div`
   justify-content: space-between;
   padding: 0.3rem;
 `;
+
+
 export const HeaderText = styled.div`
   color: #fff;
   align-self: center;

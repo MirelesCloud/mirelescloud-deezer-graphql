@@ -47,8 +47,7 @@ const Artist: React.FC<Props> = ({ data }) => {
               <Table>
                 <thead>
                   <TableRow>
-                    <TableHeader scope="col" style={{width: "25%"}}>Title</TableHeader>
-                    <TableHeader scope="col" style={{width: "25%"}}>Title</TableHeader>
+                    <TableHeader scope="col" style={{width: "20%"}}>Title</TableHeader>
                     <TableHeader scope="col" style={{width: "20%"}}>Album</TableHeader>
                     <TableHeader scope="col" style={{width: "5%"}}></TableHeader>
                     <TableHeader scope="col" style={{width: "10%"}}>Duration</TableHeader>
