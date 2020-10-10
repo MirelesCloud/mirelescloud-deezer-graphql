@@ -15,6 +15,10 @@ export const QUERY_ARTIST = gql`
         preview
         duration
         explicit
+        album {
+          title
+          cover
+        }
       }
     }
   }

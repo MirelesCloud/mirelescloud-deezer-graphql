@@ -25,7 +25,7 @@ const AlbumContainer = ({id}: OwnProps) => {
   }
 
   if (error || !data) {
-    return <div>Error</div>
+    return <div>Error !!!!</div>
   }
 
   console.log(data)

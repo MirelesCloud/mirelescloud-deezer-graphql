@@ -172,6 +172,10 @@ export type ArtistDetailQuery = (
     & { tracklist: Maybe<Array<Maybe<(
       { __typename?: 'Tracks' }
       & Pick<Tracks, 'id' | 'title' | 'preview' | 'duration' | 'explicit'>
+      & { album: Maybe<(
+        { __typename?: 'Albums' }
+        & Pick<Albums, 'title' | 'cover'>
+      )> }
     )>>> }
   )> }
 );
@@ -311,6 +315,10 @@ export const ArtistDetailDocument = gql`
       preview
       duration
       explicit
+      album {
+        title
+        cover
+      }
     }
   }
 }

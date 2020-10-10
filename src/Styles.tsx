@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from '@emotion/styled/macro'
 import { PlayCircle, PauseCircle, Heart } from '@emotion-icons/boxicons-regular'
 import { CloseCircleOutline } from '@emotion-icons/evaicons-outline'
 import { HeartFill } from '@emotion-icons/bootstrap/HeartFill'
@@ -24,27 +24,18 @@ export const NavHeader = styled('div')`
 `
 
 export const NavLeft = styled('div')`
-    width: 33.333%;
+    width: 100%;
     text-align: left;
     font-size: 2em;
     font-weight: 300;
     color: white;
 
-    @media (max-width: 992px) {
-        font-size: 1.5em;
-      }
+   
     
     @media(max-width: 768px) {
-      font-size: 1.3em;
+      font-size: 1.5em;
     }
-
-    @media(max-width: 650px) {
-      font-size: 1.1em;
-    }
-
-    @media(max-width: 378px) {
-      font-size: 0.7em;
-    }
+    
 `
 
 export const NavCenter = styled('div')`
@@ -129,10 +120,9 @@ export const Footer = styled.footer`
   background-color: #cccccc;
   text-align: center;
 `
-export const CategoryHeader = styled.h5`
+export const CategoryHeader = styled.h3`
   font-weight: 400;
-  margin-top: 30px;
-  margin-bottom: 5px;
+  margin: 30px 0 0 10px;
 `
 /* Card */
 export const Card = styled('div')`
@@ -299,7 +289,6 @@ export const ModalContent = styled.div`
   position: relative;
   flex-basis: 100%;
   margin: 10px;
-  cursor: pointer;
   transition: 0.3s all ease-in;
 `
 
@@ -338,40 +327,7 @@ export const Scroll = styled.div`
   margin-top: 30px;
   height: 100%
 `
-export const Table = styled.table`
-  width: 95%;
-  margin: 0 15px;
- 
-`
-export const TableBody = styled.tbody`
-  
-`
 
-export const TableRow = styled.tr`
-  
-`
-
-export const TableCell = styled.td`
- font-size: 0.8em;
- padding-left: 20px;
-
-`
-
-export const ExplicitCell = styled.td`
-  font-size: 0.6em;
-  font-style: oblique;
-`
-export const Duration = styled.td`
-  font-size: 0.7em;
-  margin-left: auto;
-`
-export const Preview = styled.td`
-  align: right;
-`
-
-export const LikeCell = styled.td`
-
-`
 
 export const ModalHeader = styled.h2`
   font-weight: 400;
@@ -381,10 +337,9 @@ export const ModalSubHeader = styled.h4`
   font-weight: 300;
   margin: 3px;
 `
-export const ModalCategory = styled.h5`
-  font-weight: 500;
-  margin-bottom: 5px;
-  margin-top: 5px;
+export const ModalCategory = styled.h4`
+  font-weight: 400;
+  padding: 5px 0;
 `
 export const ModalText = styled.div`
   font-size: 1rem;
@@ -417,7 +372,104 @@ export const TrackPreviewContainer = styled.div`
   margin: 0;
   box-shadow: 0 2px 3px 0 rgba(0,0,0,0.3);
 `
+/* Table */
+export const TableContainer = styled.div`
+  oveflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  padding: 0 25px;
+  align-items: center;
+  text-align: justify;
 
+  @media screen and (min-width: 600px) {
+    width: 100%;
+    flex: 1;
+    padding: 0;
+    margin: 0;
+  }
+`
+export const Table = styled.table`
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+
+  @media screen and (max-width: 600px) {
+    border: 0;
+  }
+`
+export const TableHeader = styled.th`
+  padding: .625em;
+  text-align: center;
+  font-weight: 400;
+  font-size: 0.9em;
+  border-bottom: 1px solid #ddd;
+
+  @media screen and (max-width: 600px) {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px; 
+  }
+  
+`
+
+export const TableRow = styled.tr`
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: .2em;
+
+  @media screen and (max-width: 600px) {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+`
+
+export const TableCell = styled.td`
+  padding: .2em;
+  text-align: center;
+  font-size: .8em;
+  border-bottom: 1px solid #ddd;
+    @media screen and (max-width: 600px) {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .7em;
+      text-align: right;
+
+      &:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+`
+export const ExplicitCell = styled.td`
+  font-size: 0.6em;
+  font-style: oblique;
+  text-align: left;
+`
+export const Duration = styled.td`
+  font-size: 0.7em;
+  text-align: left;
+`
+export const Preview = styled.td`
+  
+`
+
+export const LikeCell = styled.td`
+
+`
 export const Line = styled.hr`
   color: rgba(0, 0, 0, 0.7);
 `
@@ -488,27 +540,6 @@ export const Pause = styled(PauseCircle)`
   }
 `
 
-export const PlaySmall = styled(PlayCircle)`
-  width: 1.5em;
-  height: auto;
-  :hover {
-    cursor: pointer;
-    transform: scale(1.2);
-    transition: transform .5s;
-    
-  }
-`
-
-export const PauseSmall = styled(PauseCircle)`
-  width: 1.5em;
-  height: auto;
-  :hover {
-    cursor: pointer;
-    transform: scale(1.2);
-    transition: transform .5s;
-    
-  }
-`
 export const Explicit = styled.div`
   background-color: #f2f2f2;
   border: 1px solid #737373;
@@ -536,3 +567,5 @@ export const HeartLiked = styled(HeartFill)`
   padding: 0;
   
 `
+
+

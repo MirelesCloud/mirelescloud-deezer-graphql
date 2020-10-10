@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { AlbumDetailQuery } from '../../generated/graphql'
 import { formatNum, minutes } from '../../AuxFunction'
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 import {
   ModalWrapper, 
   ModalContainer,
@@ -11,16 +13,12 @@ import {
   Image,
   Row,
   Column,
-  CategoryHeader,
+  ModalCategory,
+  TableContainer,
   Table,
-  TableBody,
+  TableHeader,
   TableRow,
   TableCell,
-  Duration,
-  Preview,
-  PlaySmall,
-  PauseSmall,
-  ExplicitCell,
 } from '../../Styles'
 
 interface Props {
@@ -37,6 +35,7 @@ const Album: React.FC<Props> = ({ data }) => {
     tracks, 
     fans, 
     nb_tracks } = data?.album!
+    
   return (
     <ModalWrapper>
       <ModalContainer>
@@ -56,22 +55,32 @@ const Album: React.FC<Props> = ({ data }) => {
             </Column>
           </Row>
           <hr/>
-          <CategoryHeader>Album Tracks</CategoryHeader>
+          <ModalCategory>Album Tracks</ModalCategory>
           <Row>
-            <Table>
-              <TableBody>
-                {tracks?.map(track => (
-                  <TableRow key={track?.id}>
-                    <TrackPreview 
-                      title={track?.title!} 
-                      duration={track?.duration!} 
-                      preview={track?.preview!}
-                      explicit={track?.explicit!} 
-                    />
+            <TableContainer>
+              <Table>
+                <thead>
+                  <TableRow>
+                  <TableHeader scope="col" style={{width: "35%"}}>Title</TableHeader>
+                    <TableHeader scope="col" style={{width: "10%"}}></TableHeader>
+                    <TableHeader scope="col" style={{width: "10%"}}>Duration</TableHeader>
+                    <TableHeader scope="col">Preview</TableHeader>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </thead>
+                <tbody>
+                  {tracks?.map(track => (
+                    <TableRow key={track?.id}>
+                      <TrackPreview 
+                        title={track?.title!} 
+                        duration={track?.duration!} 
+                        preview={track?.preview!}
+                        explicit={track?.explicit!} 
+                      />
+                    </TableRow>
+                  ))}
+                </tbody>
+              </Table>
+            </TableContainer>
           </Row>
         </ModalContent>
       </ModalContainer>
@@ -87,24 +96,23 @@ interface ITrackPreview {
 }
 
 const TrackPreview: React.FC<ITrackPreview> = ({ title, duration, preview, explicit}) => {
-  const [audio] = useState(new Audio(preview!))
   const [play, setPlay] = useState(false)
   const togglePlay = () => setPlay(!play)
 
-  useEffect(() => {
-    play ? audio.play() : audio.pause()
-  },
-    [play, audio]
-  )
-
   return (
     <>
-      <TableCell>{title}</TableCell>
-      {explicit ? <ExplicitCell>Explicit</ExplicitCell> : <ExplicitCell></ExplicitCell>}
-      <Duration>{minutes(duration)}</Duration>
-      <Preview onClick={togglePlay}>
-        {play ? <PauseSmall/> : <PlaySmall/>}
-      </Preview>
+      <TableCell data-label="Title">{title}</TableCell>
+      {explicit ? <TableCell data-label="">Explicit</TableCell> : <TableCell></TableCell>}
+      <TableCell data-label="Duration">{minutes(duration)}</TableCell>
+      <TableCell data-label="Preview">
+        <AudioPlayer style={{transform: "scale(0.7)"}}
+          onPlay={togglePlay}
+          src={preview!}
+          showJumpControls={false}
+          layout={"horizontal"}
+          customAdditionalControls={[]}
+        />
+      </TableCell>
     </>
   )
 }

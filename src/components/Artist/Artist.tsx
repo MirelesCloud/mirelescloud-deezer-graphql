@@ -7,18 +7,17 @@ import {
   ModalWrapper, 
   ModalContainer,
   ModalContent,
+  ModalCategory,
   ModalHeader,
   ModalTextSm,
   Image,
   Row,
   Column,
-  CategoryHeader,
+  TableContainer,
   Table,
-  TableBody,
+  TableHeader,
   TableRow,
   TableCell,
-  Duration,
-  ExplicitCell,
 } from '../../Styles'
 
 interface Props {
@@ -26,9 +25,7 @@ interface Props {
 }
 
 const Artist: React.FC<Props> = ({ data }) => {
-  console.log(data)
   const { name, picture_big, nb_album, nb_fan, tracklist } = data?.artist!
-  console.log(data)
   return (
     <ModalWrapper>
       <ModalContainer>
@@ -44,23 +41,37 @@ const Artist: React.FC<Props> = ({ data }) => {
             </Column>
           </Row>
           <hr/>
-          <CategoryHeader>Artist Tracks</CategoryHeader>
+          <ModalCategory>Artist Tracks</ModalCategory>
           <Row>
-            
-            <Table>
-              <TableBody>
-                {tracklist!.map(track => (
-                  <TableRow key={track?.id}>
-                    <TrackPreview 
-                      title={track?.title!} 
-                      duration={track?.duration!} 
-                      preview={track?.preview!}
-                      explicit={track?.explicit!} 
-                    />
+            <TableContainer>
+              <Table>
+                <thead>
+                  <TableRow>
+                    <TableHeader scope="col" style={{width: "25%"}}>Title</TableHeader>
+                    <TableHeader scope="col" style={{width: "25%"}}>Title</TableHeader>
+                    <TableHeader scope="col" style={{width: "20%"}}>Album</TableHeader>
+                    <TableHeader scope="col" style={{width: "5%"}}></TableHeader>
+                    <TableHeader scope="col" style={{width: "10%"}}>Duration</TableHeader>
+                    <TableHeader scope="col">Preview</TableHeader>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </thead>
+                <tbody>
+                {tracklist!.map(track => (
+                    <TableRow key={track?.id}>
+                      <TrackPreview 
+                        title={track?.title!} 
+                        duration={track?.duration!} 
+                        preview={track?.preview!}
+                        explicit={track?.explicit!}
+                        album_title={track?.album?.title!}
+                        album_cover={track?.album?.cover!}
+                      />
+                    </TableRow>
+                  ))}
+                </tbody>
+
+              </Table>
+            </TableContainer>
           </Row>
         </ModalContent>
       </ModalContainer>
@@ -72,26 +83,29 @@ interface ITrackPreview {
   title: string;
   duration: number;
   preview: string;
-  explicit: boolean
+  explicit: boolean;
+  album_title: string;
+  album_cover: string;
 }
 
-const TrackPreview: React.FC<ITrackPreview> = ({ title, duration, preview, explicit}) => {
+const TrackPreview: React.FC<ITrackPreview> = ({ title, duration, preview, explicit, album_title, album_cover}) => {
 
   const [play, setPlay] = useState(false)
   const togglePlay = () => setPlay(!play)
   
   return (
     <>
-      <TableCell>{title}</TableCell>
-      {explicit ? <ExplicitCell>Explicit</ExplicitCell> : <ExplicitCell></ExplicitCell>}
-      <Duration>{minutes(duration)}</Duration>
-      <TableCell>
-        <AudioPlayer
-          style={{maxWidth: "300px", height: "50px"}}
+      <TableCell data-label="Title">{title}</TableCell>
+      <TableCell data-label="Album">{album_title}</TableCell>
+      {explicit ? <TableCell data-label="" style={{fontSize: "0.6em", fontStyle: "oblique"}}>Explicit</TableCell> : <TableCell></TableCell>}
+      <TableCell data-label="Duration" >{minutes(duration)}</TableCell>
+      <TableCell data-label="Preview" >
+        <AudioPlayer style={{transform: "scale(0.7)" }}
           onPlay={togglePlay}
           src={preview!}
           showJumpControls={false}
           layout={"horizontal"}
+          customAdditionalControls={[]}
         />
       </TableCell>
     </>
