@@ -505,7 +505,7 @@ export const HeaderText = styled.div`
 `;
 export const CloseButton = styled(CloseCircleOutline)`
   width: 1.5rem;
-  padding: 10px;
+  padding: 5px;
   color: white;
   margin-left: auto;
   :hover {
