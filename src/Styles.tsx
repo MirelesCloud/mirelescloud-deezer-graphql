@@ -492,8 +492,9 @@ export const Header = styled.div`
   justify-content: space-between;
   padding: 0.3rem;
 
-  @media and screen (max-width: 600px) {
+  @media and (min-width: 600px) {
     height: 75px;
+    border-radius: 0 0 0 0;
   }
 `;
 
@@ -505,6 +506,7 @@ export const HeaderText = styled.div`
 `;
 export const CloseButton = styled(CloseCircleOutline)`
   width: 1.5rem;
+  height: auto;
   padding: 5px;
   color: white;
   margin-left: auto;
