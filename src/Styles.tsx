@@ -496,7 +496,7 @@ export const Header = styled.div`
   justify-content: space-between;
   padding: 0.3rem;
 
-  @media (max-width: 600px) {
+  @media only screen and (min-device-width: 768px) {
     height: 30px;
   }
 `;
