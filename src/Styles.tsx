@@ -283,6 +283,10 @@ export const ModalContainer = styled.div`
   z-index: 0;
   margin: 0 30px;
   padding-bottom: 5px;
+
+  @media and screen (max-width: 378px) {
+    margin: 0 10px;
+  }
   
 `
 export const ModalContent = styled.div`
