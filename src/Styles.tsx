@@ -486,15 +486,14 @@ export const ImageSmall = styled.img`
 `
 
 export const Header = styled.div`
-  background-image: linear-gradient(to bottom right, purple, green, yellow);
+  background-image: linear-gradient(to bottom right, yellow, green, purple);
   border-radius: 8px 8px 0 0;
   display: flex;
   justify-content: space-between;
   padding: 0.3rem;
 
-  @media and (min-width: 600px) {
-    height: 75px;
-    border-radius: 0 0 0 0;
+  @media (max-width: 600px) {
+    height: 30px;
   }
 `;
 
