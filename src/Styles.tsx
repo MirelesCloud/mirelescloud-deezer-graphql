@@ -263,10 +263,11 @@ export const Dialog = styled.div`
 
   @media (min-width: 60em) {
     height:75%;
-  margin:5% auto;
-  max-height: 57em;
+    margin:5% auto;
+    max-height: 57em;
     max-width:66em;
     width:85%;
+    border-radius: 0;
   }
 `
 
@@ -498,6 +499,7 @@ export const Header = styled.div`
 
   @media only screen and (min-device-width: 768px) {
     height: 30px;
+    border-radius: 0;
   }
 `;
 
