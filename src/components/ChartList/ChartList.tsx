@@ -24,7 +24,7 @@ interface Props extends OwnProps {
 }
 
 const ChartList: React.FC<Props> = ({ data, handleId }) => {
-  console.log(data?.chart?.artists)
+ 
   return (
     <div>
       <CategoryHeader>Top Tracks</CategoryHeader>
@@ -150,7 +150,7 @@ const Artists: React.FC<IArtist> = ({id, name, picture_big, position, handleId})
         <Modal isShown={isShown} hide={toggle} modalContent={
           <Artist id={id}/>} />
       </CardBody>
-        <CardFooter>Position: {position} <Like/></CardFooter>
+        <CardFooter><Like/></CardFooter>
     </>
   )
 }

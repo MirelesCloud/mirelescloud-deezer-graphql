@@ -13,6 +13,7 @@ const ChartListContainer = (props: OwnProps) => {
   if (error || !data) {
     return <div>Error</div>
   }
+  console.log(data)
   return <ChartList data={data} {...props}/>
 }
 
